@@ -3,7 +3,7 @@ const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerDefinition = {
 openapi: '3.0.0',
 info: {
-title: 'My API',
+title: 'Genius Grid',
 version: '1.0.0',
 description: 'My API Description',
 },

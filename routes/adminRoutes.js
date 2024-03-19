@@ -11,11 +11,17 @@
  *         description: Successfully retrieved summary.
  *         content:
  *           application/json:
- *             schema:
+ *              schema:
  *               type: object
  *               properties:
- *                 summary:
- *                   type: string
+ *                 users:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/User'
+ *                 orders:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/Order'
  */
 app.get('/admin/dashboard', (req, res) => { });
 

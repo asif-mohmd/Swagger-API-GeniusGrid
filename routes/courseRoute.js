@@ -3,7 +3,7 @@
  * /api/course:
  *   post:
  *     summary: Add a Course
- *     description: add a new course.
+ *     description: Add a new course.
  *     tags:
  *       - Course
  *     requestBody:
@@ -15,64 +15,82 @@
  *             properties:
  *               name:
  *                 type: string
- *                 description: The name of the course.
  *               courseData:
  *                 type: object
- *                 description: The data of the course.
  *               demoUrl:
  *                 type: string
- *                 description: The course's url.
  *               thumbnail:
  *                 type: string
- *                 description: The thumbnail of the course.
  *     responses:
  *       201:
- *         description: course added successfully.
+ *         description: Course added successfully.
  *       400:
  *         description: Bad request, input validation failed.
  */
 app.post('/api/course', (req, res) => { });
 
-  /**
+/**
  * @swagger
  * /api/course:
  *   get:
- *     summary: get all courses
+ *     summary: Get all courses
  *     description: Retrieve details of all courses.
  *     tags:
  *       - Course
  *     responses:
  *       200:
- *         description: courses are retrieved successfully.
+ *         description: Courses retrieved successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Course'
  *       500:
- *         description: server error.
+ *         description: Server error.
  */
-  app.get('/api/course', (req, res) => { });
+app.get('/api/course', (req, res) => { });
 
-    /**
+/**
  * @swagger
  * /api/course/{id}:
  *   get:
- *     summary: get a course
- *     description: Retrieve details of the course.
+ *     summary: Get a course
+ *     description: Retrieve details of a course.
  *     tags:
  *       - Course
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
  *     responses:
  *       200:
- *         description: course retrieved successfully.
+ *         description: Course retrieved successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Course'
  *       500:
- *         description: server error.
+ *         description: Server error.
  */
-    app.get('/api/course/:id', (req, res) => { });
+app.get('/api/course/:id', (req, res) => { });
 
 /**
  * @swagger
  * /api/course/{id}:
  *   put:
- *     summary: Update Course
- *     description: update a course.
+ *     summary: Update a course
+ *     description: Update a course.
  *     tags:
  *       - Course
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
  *     requestBody:
  *       required: true
  *       content:
@@ -82,16 +100,12 @@ app.post('/api/course', (req, res) => { });
  *             properties:
  *               name:
  *                 type: string
- *                 description: The name of the course.
+ *               courseData:
+ *                 type: object
  *               demoUrl:
  *                 type: string
- *                 description: The url of the course.
- *               courseData:
- *                 type: string
- *                 description: The data of the course.
  *               thumbnail:
  *                 type: string
- *                 description: The course's thumbnail.
  *     responses:
  *       201:
  *         description: Course updated successfully.
@@ -100,18 +114,24 @@ app.post('/api/course', (req, res) => { });
  */
 app.put('/api/course/:id', (req, res) => { });
 
-  /**
+/**
  * @swagger
  * /api/course/{id}:
  *   delete:
- *     summary: delete course
- *     description: delete a course.
+ *     summary: Delete a course
+ *     description: Delete a course.
  *     tags:
  *       - Course
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
  *     responses:
  *       200:
- *         description: course deleted successfully.
+ *         description: Course deleted successfully.
  *       500:
- *         description: server error.
+ *         description: Server error.
  */
-  app.delete('/api/course/:id', (req, res) => { });
+app.delete('/api/course/:id', (req, res) => { });

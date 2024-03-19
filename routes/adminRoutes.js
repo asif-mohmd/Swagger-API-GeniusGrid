@@ -1,4 +1,3 @@
-
 /**
  * @swagger
  * /api/admin/dashboard:
@@ -10,16 +9,22 @@
  *     responses:
  *       200:
  *         description: Successfully retrieved summary.
- *        
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 summary:
+ *                   type: string
  */
 app.get('/admin/dashboard', (req, res) => { });
 
 /**
  * @swagger
- *  /api/admin/invoice:
+ *  /api/admin/instructor-list:
  *   get:
- *     summary: Get Invoice
- *     description: Retrieve a list of invoices.
+ *     summary: Get Instructors List
+ *     description: Retrieve a list of Instructors.
  *     tags:
  *       - Admin
  *     responses:
@@ -27,155 +32,235 @@ app.get('/admin/dashboard', (req, res) => { });
  *         description: Successfully retrieved the list.
  *         content:
  *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Instructor'
  *       404:
- *         description: No invoice found.
+ *         description: No Instructors found.
  *       500:
  *         description: Internal server error.
  */
-app.get('/api/admin/invoice', (req, res) => {});
+app.get('/api/admin/instructor-list', (req, res) => {});
 
 /**
  * @swagger
- * /api/admin/category:
- *   post:
- *     summary: Add a Category
- *     description: Add a new category to the list.
- *     tags:
- *       - Admin
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               categoryId:
- *                 type: string
- *                 
- *     responses:
- *       201:
- *         description: category added successfully.
- *       400:
- *         description: Bad request, input validation failed.
- */
-app.post('/api/admin/category', (req, res) => { });
-
-/**
- * @swagger
- * /api/admin/category/{id}:
- *   delete:
- *     summary: delete a Category
- *     description: delete category in the list.
- *     tags:
- *       - Admin
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               categoryId:
- *                 type: string
- *                 description: The id of the category.
- *     responses:
- *       201:
- *         description: category deleted successfully.
- *       400:
- *         description: Bad request, input validation failed.
- */
-app.delete('/api/admin/category/:id', (req, res) => {});
-
-/**
- * @swagger
- * /api/admin/category:
+ *  /api/admin/users-list:
  *   get:
- *     summary: Get category List
- *     description: Retrieve a list of category.
+ *     summary: Get users List
+ *     description: Retrieve a list of Users.
  *     tags:
  *       - Admin
  *     responses:
  *       200:
- *         description: Successfully retrieved the list of category.
+ *         description: Successfully retrieved the list.
  *         content:
  *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/User'
  *       404:
- *         description: No category found.
+ *         description: No users found.
  *       500:
  *         description: Internal server error.
  */
-app.get('/api/admin/faq', (req, res) => {});
+app.get('/api/admin/users-list', (req, res) => {});
 
 /**
  * @swagger
- * /api/admin/faq/{id}:
- *   delete:
- *     summary: Delete a faq
- *     description: delete a faq from the list.
- *     tags:
- *       - Admin
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               faqId:
- *                 type: string
- *                 
- *     responses:
- *       201:
- *         description: faq deleted successfully.
- *       400:
- *         description: Bad request, input validation failed.
- */
-app.post('/admin/faq/:id', (req, res) => {});
-
-/**
- * @swagger
- * /api/admin/faq:
+ *  /api/admin/course-list:
  *   get:
- *     summary: Get faq List
- *     description: Retrieve a list of faq.
+ *     summary: Get course List
+ *     description: Retrieve a list of Courses.
  *     tags:
  *       - Admin
  *     responses:
  *       200:
- *         description: Successfully retrieved the list of faq.
+ *         description: Successfully retrieved the list.
  *         content:
  *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Course'
  *       404:
- *         description: No faq found.
+ *         description: No course found.
  *       500:
  *         description: Internal server error.
  */
-app.get('/api/admin/faq', (req, res) => {});
+app.get('/api/admin/course-list', (req, res) => {});
 
 /**
  * @swagger
- * /api/admin/faq:
- *   post:
- *     summary: Add a faq
- *     description: Add a new faq to the list.
+ * /api/admin/user/{id}:
+ *   get:
+ *     summary: Get User Details
+ *     description: Retrieve details of a specific User.
  *     tags:
  *       - Admin
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               question:
- *                 type: string
- *                 
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         description: User ID
+ *         required: true
+ *         schema:
+ *           type: string
  *     responses:
- *       201:
- *         description: faq added successfully.
- *       400:
- *         description: Bad request, input validation failed.
+ *       200:
+ *         description: Successfully retrieved the user details.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/User'
+ *       404:
+ *         description: No user found.
+ *       500:
+ *         description: Internal server error.
  */
-app.post('/api/admin/faq', (req, res) => { });
+app.get('/api/admin/user/{id}', (req, res) => {});
 
+/**
+ * @swagger
+ * /api/admin/instructor/{id}:
+ *   get:
+ *     summary: Get Instructor Details
+ *     description: Retrieve details of a specific Instructor.
+ *     tags:
+ *       - Admin
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         description: Instructor ID
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Successfully retrieved the instructor details.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Instructor'
+ *       404:
+ *         description: No instructor found.
+ *       500:
+ *         description: Internal server error.
+ */
+app.get('/api/admin/instructor/{id}', (req, res) => {});
 
+/**
+ * @swagger
+ * /api/admin/course/{id}:
+ *   get:
+ *     summary: Get Course Details
+ *     description: Retrieve details of a specific Course.
+ *     tags:
+ *       - Admin
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         description: Course ID
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Successfully retrieved the course details.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Course'
+ *       404:
+ *         description: No course found.
+ *       500:
+ *         description: Internal server error.
+ */
+app.get('/api/admin/course/{id}', (req, res) => {});
+
+/**
+ * @swagger
+ * /api/admin/user/{id}:
+ *   post:
+ *     summary: Block/Unblock User
+ *     description: Block or unblock a user by ID.
+ *     tags:
+ *       - Admin
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         description: User ID
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Successfully blocked/unblocked the user.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/User'
+ *       404:
+ *         description: No user found.
+ *       500:
+ *         description: Internal server error.
+ */
+app.post('/api/admin/user/{id}', (req, res) => {});
+
+/**
+ * @swagger
+ * /api/admin/instructor/{id}:
+ *   post:
+ *     summary: Block/Unblock Instructor
+ *     description: Block or unblock an instructor by ID.
+ *     tags:
+ *       - Admin
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         description: Instructor ID
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Successfully blocked/unblocked the instructor.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Instructor'
+ *       404:
+ *         description: No instructor found.
+ *       500:
+ *         description: Internal server error.
+ */
+app.post('/api/admin/instructor/{id}', (req, res) => {});
+
+/**
+ * @swagger
+ * /api/admin/course/{id}:
+ *   post:
+ *     summary: Block/Unblock Course
+ *     description: Block or unblock a course by ID.
+ *     tags:
+ *       - Admin
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         description: Course ID
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Successfully blocked/unblocked the course.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Course'
+ *       404:
+ *         description: No course found.
+ *       500:
+ *         description: Internal server error.
+ */
+app.post('/api/admin/course/{id}', (req, res) => {});
